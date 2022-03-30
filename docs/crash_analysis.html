@@ -1,0 +1,294 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Crash Analysis</title>
+                
+
+        <!-- Custom HTML head -->
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+                <link rel="icon" href="favicon.svg">
+                        <link rel="shortcut icon" href="favicon.png">
+                <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+                <link rel="stylesheet" href="css/print.css" media="print">
+        
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+                <link rel="stylesheet" href="fonts/fonts.css">
+        
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+            </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Documentation</a></li><li class="chapter-item expanded "><a href="coverage_analysis.html"><strong aria-hidden="true">1.</strong> Coverage Analysis</a></li><li class="chapter-item expanded "><a href="crash_analysis.html" class="active"><strong aria-hidden="true">2.</strong> Crash Analysis</a></li><li class="chapter-item expanded "><a href="fuzzware_utils.html"><strong aria-hidden="true">3.</strong> Fuzzware Utils</a></li><li class="chapter-item expanded "><a href="manipulating_inputs.html"><strong aria-hidden="true">4.</strong> Manipulating Inputs</a></li><li class="chapter-item expanded "><a href="target_configuration.html"><strong aria-hidden="true">5.</strong> Target Configuration</a></li></ol>            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                                                <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                                            </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                                                <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                                                                        <a href="https://github.com/fuzzware-fuzzer/fuzzware" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                                                
+                    </div>
+                </div>
+
+                                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="triaging-crashes-in-fuzzware"><a class="header" href="#triaging-crashes-in-fuzzware">Triaging Crashes in Fuzzware</a></h1>
+<p>You set up a firmware image to fuzz test and were able to find crashes (these are located in <code>fuzzware-project/mainXXX/fuzzers/fuzzerY/crashes/id*</code>).</p>
+<p>Here we want to talk about what nature of crashes to expect and how to make sense of a crashing input.</p>
+<p>To find out about whether you found crashes, you can simply use bash:</p>
+<pre><code>ls fuzzware-project/main*/fuzzers/fuzzer*/crashes/id*
+</code></pre>
+<p>... or use the Fuzzware <code>genstats</code> util:</p>
+<pre><code>fuzzware genstats crashcontexts
+</code></pre>
+<h1 id="types-of-crashes-to-expect"><a class="header" href="#types-of-crashes-to-expect">Types of Crashes to Expect</a></h1>
+<p>Due to the nature of how Fuzzware operates, triggering crashes does not need to mean that this represents a security issue. We experienced different types of crashes.</p>
+<p>The first category of crashes stems from incomplete configurations and hardware behavior which cannot be caught by Fuzzware:</p>
+<ol>
+<li>Crashes due to <strong>memory mis-configuration</strong>: It is possible that the board your target expects to run on has some custom MMIO region, for example a version information ROM / device ID page filled in the factory, or a vendor-specific device. These crashes typically occur very early on. These crashes can be remediated by updating your configuration and re-running the pipeline.</li>
+<li>Crashes due to <strong>broken assumptions about hardware behavior</strong>: The hardware which the firmware code expects to interact with may have certain restrictions, such as upper bounds on the size of a radio frame. In these cases, firmware code may omit a size check as it <em>knows</em> as specific value to be bounded to a certain value. A prime example of this is a radio frame which is known to have its size limited to a maximum of <code>128</code>, but where a full byte is used as a size variable. Firmware code may use a full byte as a size variable and copy frame contents into a fixed-size buffer of <code>128</code> bytes. Fuzzware will not see this implicit assumptions (as checks in firmware code are missing) and at some point provide a size value of <code>128-255</code>, which will likely crash the firmware. In this case: Congratz, you have found the firmware not to behave correctly under a malicious device (which you consider a bug). However, as your attacker model probably does not include tinkering with hardware, you will have to make sure via code or configuration changes that the bounds are adhered to by Fuzzware.</li>
+<li>Crashes due to <strong>custom hardware behavior</strong>: Fuzzware does not emulate peripheral state, and does not react to writes to MMIO regions. Firmware code, on the other hand, may make implicit assumptions about what its previous MMIO writes mean to a real device, e.g. about its interrupt behavior: While a given interrupt is enabled in the interrupt controller (NVIC), it may be disabled implicitly by the firmware by writing a certain value to an MMIO register of a peripheral. Fuzzware is unaware of such semantics: While raising interrupts, Fuzzware only considers the state of the interrupt controller, and raises any interrupt which has been activated in the interrupt controller itself. This is regardless of other custom contracts that firmware and hardware implicitly share, but Fuzzware does not know about (e.g., a custom enable/disable register for certain interrupts). This may lead to Fuzzware raising interrupts at unexpected times. This in turn might lead to a crash. Similarly, the firmware writing pointers to an MMIO register may assume a pointer to be read back in case the MMIO register is read later. Fuzzware's MMIO modeling is unable to catch this due to its local nature. While reading back the supposed pointer, firmware will consequently interpret fuzzing input as a pointer value, again resulting in a crash. Depending on the situation, you will need to make sure such conditions are not the reason for a crash, or configure your way around them manually.</li>
+</ol>
+<p>The second category of crashes occurs during the initialization phase of firmware:</p>
+<ol>
+<li>Crashes due to <strong>improper handling of initialization errors</strong>: Firmware developers may get away with not handling errors during the initialization thoroughly. This is because these failures happen infrequently in practice, and a device reset may solve the problem in a practical setting. However, the fuzzer will trigger all types of error conditions. In principle, this is good, especially when error conditions can be exploited by an attacker. However, having these error cases draw too much fuzzer attention can obstruct targeting legitimate functionality. So it is not uncommon for you to have to first make a firmware image robust enough so that you can reach deeper legitimate functionality to uncover bugs there. Here, you will want to iteratively fix initialization issues, either via configuration (e.g., setting <code>exit_at</code> configurations to make error cases less interesting or using a <code>boot</code> config), or by fixing such error in firmware code.</li>
+</ol>
+<p>The third category of crashes is what we are typically most interested in. You may entirely skip the first two types of crashes for your own firmware image and configurations, but this will not always be true. When you are at this point, you will find:</p>
+<ol>
+<li>Crashes due to <strong>security-relevant bugs</strong>: At this point you most likely found that the fuzzer is reaching some type of input processing function with fuzzer-controlled data and code coverage a bit deeper into input processing. A sign of a good bug in practice has been that the crash does not occur immediately. Here things become interesting from a remote attacker's security research perspective.</li>
+</ol>
+<h1 id="initial-crash-bucketing"><a class="header" href="#initial-crash-bucketing">Initial Crash Bucketing</a></h1>
+<p>As previously indicated, as a first step, we can identify whether there are any crashes by looking inside <code>fuzzware-project/mainXXX/fuzzers/fuzzerY/crashes/id*</code> within a project directory.</p>
+<p>When crashes are present, we can use the Fuzzware <code>genstats</code> utility to pre-sort crashes.</p>
+<pre><code>fuzzware genstats crashcontexts
+</code></pre>
+<p>This will place a text file at <code>fuzzware-project/stats/crash_contexts.txt</code> which re-runs and buckets the inputs by <code>pc</code> / <code>lr</code> context. While neither means that crashes with the same context have the same root cause, nor that crashes with different crash contexts stem from different bugs, we can get an initial assessment of the variety of crashes and more easily pick representative inputs which stand out.</p>
+<h1 id="crash-coverage-search"><a class="header" href="#crash-coverage-search">Crash Coverage Search</a></h1>
+<p>We can search crashes by filtering their coverage via the <code>fuzzware cov --crashes</code> utility:</p>
+<pre><code>fuzzware cov --crashes &lt;my_vuln_function&gt;
+</code></pre>
+<p>In case we expect or found a root cause already, we may also want to find out whether there are crashing inputs that do not trigger certain coverage to find alternative crashes that might have a different root cause:</p>
+<pre><code>fuzzware cov --crashes --exclude &lt;my_suspected_vuln&gt;
+</code></pre>
+<h1 id="analyzing-a-specific-crashing-input"><a class="header" href="#analyzing-a-specific-crashing-input">Analyzing a Specific Crashing Input</a></h1>
+<h2 id="debug-log-based-crash-analysis"><a class="header" href="#debug-log-based-crash-analysis">Debug Log-Based Crash Analysis</a></h2>
+<p>To figure out what is going on for a given crashing input, we can replay that input with a set of diagnostic emulator arguments. Useful arguments include <code>-v</code> (printing the exit reason and final register state), <code>-t</code> (which prints function names for better orientation), and <code>-M</code> (which prints visited basic blocks and memory accesses to stdout).</p>
+<pre><code>fuzzware replay -M -t &lt;path_to_crashing_input&gt; &gt; crash_log.txt
+</code></pre>
+<p>From here, we can analyze the crash location and memory writes, and hopefully track the issue back to its original corruption.</p>
+<h2 id="interactive-crash-analysis"><a class="header" href="#interactive-crash-analysis">Interactive Crash Analysis</a></h2>
+<p>We can also set breakpoints on a particular basic block (CAUTION: debugging currently works based on basic block hooks, so breakpoints at an instruction within a basic block will <strong>not trigger</strong>) function of interest and get dropped into a python shell with access to the unicorn object (the <code>uc</code> variable):</p>
+<pre><code>fuzzware replay -b &lt;my_basic_block_addr_or_symbol&gt; &lt;path_to_crashing_input&gt;
+</code></pre>
+<p>When arriving at a breakpoint, we can look around by inspecting the register state as well as memory contents:</p>
+<pre><code>uc.regs
+uc.regs.r0
+uc.mem.u32(&lt;addr&gt;, &lt;number_of_dwords&gt;)
+</code></pre>
+<p>For example, to print the source buffer of a memcpy (assuming we configured <code>memcpy</code> as a symbol), we would do:</p>
+<pre><code>fuzzware replay -b memcpy &lt;path_to_crashing_input&gt;
+
+uc.mem.u8(uc.mem.r1, uc.mem.r2)
+</code></pre>
+<h2 id="configuring-target-specific-debug-trace-hooks"><a class="header" href="#configuring-target-specific-debug-trace-hooks">Configuring Target-Specific Debug Trace Hooks</a></h2>
+<p>If we suspect that an issue lies with a specific piece of functionality or API function, we can manually add tracing hooks to the target configuration. Fuzzware comes with some generic debug hooks to achieve this:</p>
+<ul>
+<li><code>fuzzware_harness.user_hooks.generic.stdio.puts</code></li>
+<li><code>fuzzware_harness.user_hooks.generic.stdio.printf</code></li>
+<li><code>fuzzware_harness.user_hooks.debug.print_args_0</code></li>
+<li><code>fuzzware_harness.user_hooks.debug.print_args_1</code></li>
+<li><code>fuzzware_harness.user_hooks.debug.print_args_2</code></li>
+<li><code>fuzzware_harness.user_hooks.debug.print_args_3</code></li>
+</ul>
+<p>Taking an example for zephyr-os race conditions, we might want to monitor the three semaphore APIs <code>z_impl_k_sem_init</code>, <code>z_impl_k_sem_take</code>, and <code>z_impl_k_sem_give</code>.</p>
+<pre><code>handlers:
+  z_impl_k_sem_init:
+    do_return: false
+    handler: fuzzware_harness.user_hooks.debug.print_args_3
+  z_impl_k_sem_take:
+    do_return: false
+    handler: fuzzware_harness.user_hooks.debug.print_args_1
+  z_impl_k_sem_give:
+    do_return: false
+    handler: fuzzware_harness.user_hooks.debug.print_args_1
+</code></pre>
+<p><strong>NOTE: Make sure to copy and modify the config.yml from the mainXXX directory that the given inputs belongs to. Otherwise, MMIO models will be missing/mismatching and the run will not replay as expected. For example, for the third main directory, create a backup and modify fuzzware-project/main003/config.yml. Once outside the fuzzware-project directory, you will also need to use the plain &quot;fuzzware emu&quot; utility instead of the &quot;fuzzware replay&quot; utility to run inputs for the given configuration.</strong></p>
+<p>As an example, please refer to the <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/03-fuzzing-new-targets/zephyr-os/prebuilt_samples/CVE-2021-3329/POC/config.yml">crashing POC of CVE-2021-3329</a> to see how these hooks can make understanding a given crash significantly simpler.</p>
+<p>Also, for an example of a set of generic debug print hooks (do not use in the fuzzing configuration itself!), refer to <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/03-fuzzing-new-targets/zephyr-os/building/base_configs/zephyr_debug_snippets.yml">zephyr_debug_snippets.yml</a> within the fuzzware-experiments repo.</p>
+<h2 id="scripting-a-trace-analysis"><a class="header" href="#scripting-a-trace-analysis">Scripting A Trace Analysis</a></h2>
+<p>Caution: This is not much of an actively used way for analyzing crashes, but making you aware of the possibility may be worth mentioning to the interested reader. It may also allow you get started on building some crash analysis tooling. In case you do build such tooling, make sure to let us know about it!</p>
+<p>In case you prefer to write scripts to analyze traces, fuzzware provides some trace dumping and parsing utilities. For example, in case you would like to analyze a memory read/write trace, you could use:</p>
+<pre><code>fuzzware replay --ram-trace-out=ram_trace.txt &lt;path_to_crashing_input&gt;
+</code></pre>
+<p>And then parse this trace using a Python script (within the <code>fuzzware venv</code>):</p>
+<pre><code>from fuzzware_harness.tracing.serialization.parse_mem_trace
+
+for event_id, pc, lr, mode, size, address, val_text in parse_mem_trace(&quot;ram_trace.txt&quot;):
+    # Perform some analysis here
+    pass
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                                                    <a rel="prev" href="coverage_analysis.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+                                                    <a rel="next" href="fuzzware_utils.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                                    <a rel="prev" href="coverage_analysis.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+                                    <a rel="next" href="fuzzware_utils.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                            </nav>
+
+        </div>
+
+        
+        
+        
+                <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+        
+                <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        
+    </body>
+</html>

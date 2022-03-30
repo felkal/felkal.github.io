@@ -1,0 +1,575 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title></title>
+                <meta name="robots" content="noindex" />
+                
+
+        <!-- Custom HTML head -->
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+                <link rel="icon" href="favicon.svg">
+                        <link rel="shortcut icon" href="favicon.png">
+                <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+                <link rel="stylesheet" href="css/print.css" media="print">
+        
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+                <link rel="stylesheet" href="fonts/fonts.css">
+        
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+            </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Documentation</a></li><li class="chapter-item expanded "><a href="coverage_analysis.html"><strong aria-hidden="true">1.</strong> Coverage Analysis</a></li><li class="chapter-item expanded "><a href="crash_analysis.html"><strong aria-hidden="true">2.</strong> Crash Analysis</a></li><li class="chapter-item expanded "><a href="fuzzware_utils.html"><strong aria-hidden="true">3.</strong> Fuzzware Utils</a></li><li class="chapter-item expanded "><a href="manipulating_inputs.html"><strong aria-hidden="true">4.</strong> Manipulating Inputs</a></li><li class="chapter-item expanded "><a href="target_configuration.html"><strong aria-hidden="true">5.</strong> Target Configuration</a></li></ol>            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                                                <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                                            </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                                                <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                                                                        <a href="https://github.com/fuzzware-fuzzer/fuzzware" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                                                
+                    </div>
+                </div>
+
+                                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="documentation-files"><a class="header" href="#documentation-files">Documentation Files</a></h1>
+<p>The following files are meant to give you additional insight into how to use and deal with different stages of the Fuzzware workflow.</p>
+<table><thead><tr><th>File</th><th>Description</th></tr></thead><tbody>
+<tr><td><a href="target_configuration.html">target_configuration.md</a></td><td>Tipps on creating an initial config and most importantly, refining an existing configuration to get the most out of your fuzzing cycles</td></tr>
+<tr><td><a href="coverage_analysis.html">coverage_analysis.md</a></td><td>Given a <code>fuzzware-project</code> directory, figure out how the fuzzer is doing and where/why it gets stuck.</td></tr>
+<tr><td><a href="crash_analysis.html">crash_analysis.md</a></td><td>Checking for crashes, bucketing them, and analyzing their root cause.</td></tr>
+<tr><td><a href="fuzzware_utils.html">fuzzware_utils.md</a></td><td>An overview of some of the (other) Fuzzware tools and when they could be useful</td></tr>
+<tr><td><a href="manipulating_inputs.html">manipulating_inputs.md</a></td><td>How to understand and manipulate inputs on your own, if you really need to</td></tr>
+<tr><td><a href="../emulator/README_config.yml">/emulator/README_config.yml</a></td><td>A pretty detailed (even if maybe not quite definitive) description of the config.yml syntax and supported options.</td></tr>
+<tr><td><a href="../pipeline/README_pipeline_architecture.html">/pipeline/README.md</a></td><td>An overview of the how the pipeline component is implented.</td></tr>
+</tbody></table>
+<p>As always, you don't necessarily need to treat the code itself as a black box. Feel free to also check out the emulator- as well as the pipeline source code itself.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="analyzing-code-coverage"><a class="header" href="#analyzing-code-coverage">Analyzing Code Coverage</a></h1>
+<p>After freshly configuring a firmware image and fuzzing it, we are naturally interested in how the fuzzer is doing. Fuzzware provides the <code>fuzzware cov</code> utility to analyze code coverage over a given <code>fuzzware-project</code> directory. There are different levels of detail in which we want to gather information about the current coverage and we give some examples of how to use <code>fuzzware cov</code> command-line arguments to achieve different goals.</p>
+<h2 id="coverage-overview"><a class="header" href="#coverage-overview">Coverage Overview</a></h2>
+<p>To get an overview on coverage on stdout, we can simply use <code>fuzzware cov</code> without arguments.</p>
+<pre><code>fuzzware cov
+</code></pre>
+<p>This will print information on covered and non-covered functions and basic blocks to stdout.</p>
+<p>For a machine-readable coverage format, we can also dump a file:</p>
+<pre><code>fuzzware cov --out cov.txt
+</code></pre>
+<p>This will dump a list of the covered basic blocks in hexadecimal ascii format to <code>cov.txt</code>. We can import this file in a coverage visualization such as <a href="https://github.com/gaasedelen/lighthouse">lighthouse</a> (for IDA) or <a href="https://github.com/0ffffffffh/dragondance">dragondance</a> (for Ghidra).</p>
+<h2 id="searching-for-specific-coverage"><a class="header" href="#searching-for-specific-coverage">Searching for Specific Coverage</a></h2>
+<p>It is likely that upon inspecting the coverage and looking at the firmware code ourselves, we are looking for inputs that actually cover a specific piece of functionality. To find an input that covers the <code>main</code> function, we can use:</p>
+<pre><code>fuzzware cov main
+</code></pre>
+<p>To cycle through some inputs, we can also use the <code>--skip-num</code> and <code>--num-matches</code> arguments to find multiple inputs that cover the functionality we are looking for.</p>
+<p>We may also want to find some combination of coverage that we would like to find an input for. To achieve this, simply supply multiple symbols:</p>
+<pre><code>fuzzware cov my_init_function main
+</code></pre>
+<p>And if we identified some error cases (for example, in the firmware's initialization code), we may want to check whether there is an input which reaches certain functionality without previously viting another piece of code. This can be done using the <code>--exclude</code> argument:</p>
+<pre><code>fuzzware cov --exclude=&quot;my_init_failure_bb_1,my_init_failure_bb_2&quot; my_init_function main
+</code></pre>
+<p>Which will try to find an input which leads to covering <code>my_init_function</code> and <code>main</code> without covering either <code>my_init_failure_bb_1</code> or <code>my_init_failure_bb_2</code>.</p>
+<h2 id="replaying-inputs"><a class="header" href="#replaying-inputs">Replaying Inputs</a></h2>
+<p>After we identified inputs which are worth investigating, we can re-run them in the emulator using the <code>fuzzware replay</code> utility (which accepts the same additional arguments as <code>fuzzware emu</code> does for extra debug output, setting breakpoints, generating traces, and the like. Refer to <code>fuzzware emu -h</code> for a full set of options).</p>
+<pre><code>fuzzware replay -t &lt;path_to_input_file&gt;
+</code></pre>
+<p>As a shortcut, the following also works to replay the first input that can be found which covers the <code>main</code> function:</p>
+<pre><code>fuzzware replay --covering main
+</code></pre>
+<p>From here, understanding the behavior of a given input works in the same way as understanding crashing inputs. Refer to <a href="crash_analysis.html">crash_analysis.md</a> for more information.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="triaging-crashes-in-fuzzware"><a class="header" href="#triaging-crashes-in-fuzzware">Triaging Crashes in Fuzzware</a></h1>
+<p>You set up a firmware image to fuzz test and were able to find crashes (these are located in <code>fuzzware-project/mainXXX/fuzzers/fuzzerY/crashes/id*</code>).</p>
+<p>Here we want to talk about what nature of crashes to expect and how to make sense of a crashing input.</p>
+<p>To find out about whether you found crashes, you can simply use bash:</p>
+<pre><code>ls fuzzware-project/main*/fuzzers/fuzzer*/crashes/id*
+</code></pre>
+<p>... or use the Fuzzware <code>genstats</code> util:</p>
+<pre><code>fuzzware genstats crashcontexts
+</code></pre>
+<h1 id="types-of-crashes-to-expect"><a class="header" href="#types-of-crashes-to-expect">Types of Crashes to Expect</a></h1>
+<p>Due to the nature of how Fuzzware operates, triggering crashes does not need to mean that this represents a security issue. We experienced different types of crashes.</p>
+<p>The first category of crashes stems from incomplete configurations and hardware behavior which cannot be caught by Fuzzware:</p>
+<ol>
+<li>Crashes due to <strong>memory mis-configuration</strong>: It is possible that the board your target expects to run on has some custom MMIO region, for example a version information ROM / device ID page filled in the factory, or a vendor-specific device. These crashes typically occur very early on. These crashes can be remediated by updating your configuration and re-running the pipeline.</li>
+<li>Crashes due to <strong>broken assumptions about hardware behavior</strong>: The hardware which the firmware code expects to interact with may have certain restrictions, such as upper bounds on the size of a radio frame. In these cases, firmware code may omit a size check as it <em>knows</em> as specific value to be bounded to a certain value. A prime example of this is a radio frame which is known to have its size limited to a maximum of <code>128</code>, but where a full byte is used as a size variable. Firmware code may use a full byte as a size variable and copy frame contents into a fixed-size buffer of <code>128</code> bytes. Fuzzware will not see this implicit assumptions (as checks in firmware code are missing) and at some point provide a size value of <code>128-255</code>, which will likely crash the firmware. In this case: Congratz, you have found the firmware not to behave correctly under a malicious device (which you consider a bug). However, as your attacker model probably does not include tinkering with hardware, you will have to make sure via code or configuration changes that the bounds are adhered to by Fuzzware.</li>
+<li>Crashes due to <strong>custom hardware behavior</strong>: Fuzzware does not emulate peripheral state, and does not react to writes to MMIO regions. Firmware code, on the other hand, may make implicit assumptions about what its previous MMIO writes mean to a real device, e.g. about its interrupt behavior: While a given interrupt is enabled in the interrupt controller (NVIC), it may be disabled implicitly by the firmware by writing a certain value to an MMIO register of a peripheral. Fuzzware is unaware of such semantics: While raising interrupts, Fuzzware only considers the state of the interrupt controller, and raises any interrupt which has been activated in the interrupt controller itself. This is regardless of other custom contracts that firmware and hardware implicitly share, but Fuzzware does not know about (e.g., a custom enable/disable register for certain interrupts). This may lead to Fuzzware raising interrupts at unexpected times. This in turn might lead to a crash. Similarly, the firmware writing pointers to an MMIO register may assume a pointer to be read back in case the MMIO register is read later. Fuzzware's MMIO modeling is unable to catch this due to its local nature. While reading back the supposed pointer, firmware will consequently interpret fuzzing input as a pointer value, again resulting in a crash. Depending on the situation, you will need to make sure such conditions are not the reason for a crash, or configure your way around them manually.</li>
+</ol>
+<p>The second category of crashes occurs during the initialization phase of firmware:</p>
+<ol>
+<li>Crashes due to <strong>improper handling of initialization errors</strong>: Firmware developers may get away with not handling errors during the initialization thoroughly. This is because these failures happen infrequently in practice, and a device reset may solve the problem in a practical setting. However, the fuzzer will trigger all types of error conditions. In principle, this is good, especially when error conditions can be exploited by an attacker. However, having these error cases draw too much fuzzer attention can obstruct targeting legitimate functionality. So it is not uncommon for you to have to first make a firmware image robust enough so that you can reach deeper legitimate functionality to uncover bugs there. Here, you will want to iteratively fix initialization issues, either via configuration (e.g., setting <code>exit_at</code> configurations to make error cases less interesting or using a <code>boot</code> config), or by fixing such error in firmware code.</li>
+</ol>
+<p>The third category of crashes is what we are typically most interested in. You may entirely skip the first two types of crashes for your own firmware image and configurations, but this will not always be true. When you are at this point, you will find:</p>
+<ol>
+<li>Crashes due to <strong>security-relevant bugs</strong>: At this point you most likely found that the fuzzer is reaching some type of input processing function with fuzzer-controlled data and code coverage a bit deeper into input processing. A sign of a good bug in practice has been that the crash does not occur immediately. Here things become interesting from a remote attacker's security research perspective.</li>
+</ol>
+<h1 id="initial-crash-bucketing"><a class="header" href="#initial-crash-bucketing">Initial Crash Bucketing</a></h1>
+<p>As previously indicated, as a first step, we can identify whether there are any crashes by looking inside <code>fuzzware-project/mainXXX/fuzzers/fuzzerY/crashes/id*</code> within a project directory.</p>
+<p>When crashes are present, we can use the Fuzzware <code>genstats</code> utility to pre-sort crashes.</p>
+<pre><code>fuzzware genstats crashcontexts
+</code></pre>
+<p>This will place a text file at <code>fuzzware-project/stats/crash_contexts.txt</code> which re-runs and buckets the inputs by <code>pc</code> / <code>lr</code> context. While neither means that crashes with the same context have the same root cause, nor that crashes with different crash contexts stem from different bugs, we can get an initial assessment of the variety of crashes and more easily pick representative inputs which stand out.</p>
+<h1 id="crash-coverage-search"><a class="header" href="#crash-coverage-search">Crash Coverage Search</a></h1>
+<p>We can search crashes by filtering their coverage via the <code>fuzzware cov --crashes</code> utility:</p>
+<pre><code>fuzzware cov --crashes &lt;my_vuln_function&gt;
+</code></pre>
+<p>In case we expect or found a root cause already, we may also want to find out whether there are crashing inputs that do not trigger certain coverage to find alternative crashes that might have a different root cause:</p>
+<pre><code>fuzzware cov --crashes --exclude &lt;my_suspected_vuln&gt;
+</code></pre>
+<h1 id="analyzing-a-specific-crashing-input"><a class="header" href="#analyzing-a-specific-crashing-input">Analyzing a Specific Crashing Input</a></h1>
+<h2 id="debug-log-based-crash-analysis"><a class="header" href="#debug-log-based-crash-analysis">Debug Log-Based Crash Analysis</a></h2>
+<p>To figure out what is going on for a given crashing input, we can replay that input with a set of diagnostic emulator arguments. Useful arguments include <code>-v</code> (printing the exit reason and final register state), <code>-t</code> (which prints function names for better orientation), and <code>-M</code> (which prints visited basic blocks and memory accesses to stdout).</p>
+<pre><code>fuzzware replay -M -t &lt;path_to_crashing_input&gt; &gt; crash_log.txt
+</code></pre>
+<p>From here, we can analyze the crash location and memory writes, and hopefully track the issue back to its original corruption.</p>
+<h2 id="interactive-crash-analysis"><a class="header" href="#interactive-crash-analysis">Interactive Crash Analysis</a></h2>
+<p>We can also set breakpoints on a particular basic block (CAUTION: debugging currently works based on basic block hooks, so breakpoints at an instruction within a basic block will <strong>not trigger</strong>) function of interest and get dropped into a python shell with access to the unicorn object (the <code>uc</code> variable):</p>
+<pre><code>fuzzware replay -b &lt;my_basic_block_addr_or_symbol&gt; &lt;path_to_crashing_input&gt;
+</code></pre>
+<p>When arriving at a breakpoint, we can look around by inspecting the register state as well as memory contents:</p>
+<pre><code>uc.regs
+uc.regs.r0
+uc.mem.u32(&lt;addr&gt;, &lt;number_of_dwords&gt;)
+</code></pre>
+<p>For example, to print the source buffer of a memcpy (assuming we configured <code>memcpy</code> as a symbol), we would do:</p>
+<pre><code>fuzzware replay -b memcpy &lt;path_to_crashing_input&gt;
+
+uc.mem.u8(uc.mem.r1, uc.mem.r2)
+</code></pre>
+<h2 id="configuring-target-specific-debug-trace-hooks"><a class="header" href="#configuring-target-specific-debug-trace-hooks">Configuring Target-Specific Debug Trace Hooks</a></h2>
+<p>If we suspect that an issue lies with a specific piece of functionality or API function, we can manually add tracing hooks to the target configuration. Fuzzware comes with some generic debug hooks to achieve this:</p>
+<ul>
+<li><code>fuzzware_harness.user_hooks.generic.stdio.puts</code></li>
+<li><code>fuzzware_harness.user_hooks.generic.stdio.printf</code></li>
+<li><code>fuzzware_harness.user_hooks.debug.print_args_0</code></li>
+<li><code>fuzzware_harness.user_hooks.debug.print_args_1</code></li>
+<li><code>fuzzware_harness.user_hooks.debug.print_args_2</code></li>
+<li><code>fuzzware_harness.user_hooks.debug.print_args_3</code></li>
+</ul>
+<p>Taking an example for zephyr-os race conditions, we might want to monitor the three semaphore APIs <code>z_impl_k_sem_init</code>, <code>z_impl_k_sem_take</code>, and <code>z_impl_k_sem_give</code>.</p>
+<pre><code>handlers:
+  z_impl_k_sem_init:
+    do_return: false
+    handler: fuzzware_harness.user_hooks.debug.print_args_3
+  z_impl_k_sem_take:
+    do_return: false
+    handler: fuzzware_harness.user_hooks.debug.print_args_1
+  z_impl_k_sem_give:
+    do_return: false
+    handler: fuzzware_harness.user_hooks.debug.print_args_1
+</code></pre>
+<p><strong>NOTE: Make sure to copy and modify the config.yml from the mainXXX directory that the given inputs belongs to. Otherwise, MMIO models will be missing/mismatching and the run will not replay as expected. For example, for the third main directory, create a backup and modify fuzzware-project/main003/config.yml. Once outside the fuzzware-project directory, you will also need to use the plain &quot;fuzzware emu&quot; utility instead of the &quot;fuzzware replay&quot; utility to run inputs for the given configuration.</strong></p>
+<p>As an example, please refer to the <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/03-fuzzing-new-targets/zephyr-os/prebuilt_samples/CVE-2021-3329/POC/config.yml">crashing POC of CVE-2021-3329</a> to see how these hooks can make understanding a given crash significantly simpler.</p>
+<p>Also, for an example of a set of generic debug print hooks (do not use in the fuzzing configuration itself!), refer to <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/03-fuzzing-new-targets/zephyr-os/building/base_configs/zephyr_debug_snippets.yml">zephyr_debug_snippets.yml</a> within the fuzzware-experiments repo.</p>
+<h2 id="scripting-a-trace-analysis"><a class="header" href="#scripting-a-trace-analysis">Scripting A Trace Analysis</a></h2>
+<p>Caution: This is not much of an actively used way for analyzing crashes, but making you aware of the possibility may be worth mentioning to the interested reader. It may also allow you get started on building some crash analysis tooling. In case you do build such tooling, make sure to let us know about it!</p>
+<p>In case you prefer to write scripts to analyze traces, fuzzware provides some trace dumping and parsing utilities. For example, in case you would like to analyze a memory read/write trace, you could use:</p>
+<pre><code>fuzzware replay --ram-trace-out=ram_trace.txt &lt;path_to_crashing_input&gt;
+</code></pre>
+<p>And then parse this trace using a Python script (within the <code>fuzzware venv</code>):</p>
+<pre><code>from fuzzware_harness.tracing.serialization.parse_mem_trace
+
+for event_id, pc, lr, mode, size, address, val_text in parse_mem_trace(&quot;ram_trace.txt&quot;):
+    # Perform some analysis here
+    pass
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fuzzware-utilities"><a class="header" href="#fuzzware-utilities">Fuzzware Utilities</a></h1>
+<p>Here we go into some of Fuzzware's utilities. Note that some of this duplicates with the other READMEs and not all utilities are covered exhaustively. For help on the different components of fuzzware, use the <code>fuzzware -h</code> command.</p>
+<p>Running fuzzware typically means running the pipeline component (command <code>&quot;fuzzware pipeline&quot;</code> in a configured directory) which performs the job of fuzzing, looking at interesting traces and updating the emulator (with MMIO models) on the fly. Fuzzware will create a <code>fuzzware-project</code> directory next to your firmware image containing all the data upon which it operates.</p>
+<p>To make sense of pipeline results (contents of a <code>fuzzware-project</code> directory), additional fuzzware utilities are used. Manual tasks on pipeline results include finding input files which trigger certain behaviors (<code>fuzzware cov</code>), analyzing firmware behavior for a specific crashing or non-crashing input (<code>fuzzware replay</code>). These other utilities are introduced later in this document.</p>
+<p>Before trying to run fuzzware, make sure that everything has been installed <em>and that you are in the correct virtualenv</em> in case you are using a local setup rather than in docker. When fuzzing is involved, also make sure your system is set up for afl to agree with its environment (as root, on host):</p>
+<pre><code>echo core &gt;/proc/sys/kernel/core_pattern
+cd /sys/devices/system/cpu
+echo performance | tee cpu*/cpufreq/scaling_governor
+</code></pre>
+<p>When running fuzzware directly on a host system, make sure to also execute everything in a virtualenv:</p>
+<pre><code>workon fuzzware
+</code></pre>
+<h2 id="starting-the-pipeline"><a class="header" href="#starting-the-pipeline">Starting the Pipeline</a></h2>
+<p>The pipeline is what you want to be using whenever you start fuzzing a firmware image as it automatically manages fuzzing and model generation for you. It will generate the configurations and inputs that you can use to perform manual triaging and troubleshooting.</p>
+<p>For a properly configured firmware image and when within the installed <code>fuzzware</code> docker container or the <code>fuzzware</code> virtualenv on your locally installed system, you can get started by simply navigating to a correctly configured target directory in <a href="examples">the examples subdirectory</a> and starting the pipeline with default arguments:</p>
+<p>Using Docker:</p>
+<pre><code>./run_docker.sh ./examples fuzzware pipeline ./pw-recovery/ARCH_PRO
+</code></pre>
+<p>On your local host setup:</p>
+<pre><code>workon fuzzware &amp;&amp; fuzzware pipeline ./examples/pw-recovery/ARCH_PRO
+</code></pre>
+<p>This will create a <code>fuzzware-project</code> subdirectory and start the full pipeline which handles fuzzing, modeling and configuration migrations automatically. The fuzzing results will be written to <code>examples/pw-recovery/ARCH_PRO/fuzzware-project</code> in both of the above cases:</p>
+<ul>
+<li><code>fuzzware-project/mainXXX</code>: Emulator configuration iterations</li>
+<li><code>fuzzware-project/mainXXX/fuzzers/fuzzerY</code>: Fuzzer directory for the given configuration</li>
+<li><code>fuzzware-project/mainXXX/fuzzers/fuzzerY/queue</code>: Fuzzer inputs</li>
+<li><code>fuzzware-project/mainXXX/fuzzers/fuzzerY/traces</code>: Pipeline-generated compact traces (detailed traces can be generated manually using <code>fuzzware replay</code> or <code>fuzzware emu</code>)</li>
+</ul>
+<p>For more information on the results stored in the <code>fuzzware-project</code> directory, refer to the pipeline's README <a href="pipeline/README.html">pipeline/README.md</a>.</p>
+<p>There are situations where you might want to use a sub-component in isolation. This may be the case for troubleshooting, debugging, crash triaging and during fuzzware development. For a full list of supported commands, use:</p>
+<pre><code>fuzzware -h
+</code></pre>
+<h2 id="coverage-analysis"><a class="header" href="#coverage-analysis">Coverage Analysis</a></h2>
+<p>As a means to more easily find inputs which lead to particular coverage, the <code>fuzzware cov</code> utility finds an input which contains a given basic block or symbol in its trace. This can be used to find an input to use with <code>fuzzware replay</code>.</p>
+<p>To find an input file within the current project that reaches the <code>main</code> function, use:</p>
+<pre><code>fuzzware cov main
+</code></pre>
+<p>For a full list of options:</p>
+<pre><code>fuzzware cov -h
+</code></pre>
+<h2 id="replaying-emulation-runs"><a class="header" href="#replaying-emulation-runs">Replaying Emulation Runs</a></h2>
+<p>Once the pipeline has been running for a while, you may be interested in what is actually going on in the configurations and the inputs (and maybe crashes) that it generated.</p>
+<p><code>fuzzware replay</code> can be used to easily reproduce single emulation runs for a pipeline-residing input file. It is a wrapper around <code>fuzzware emu</code> which automatically locates the correct configuration file and command-line arguments for an emulator configuration iteration. It allows you to re-run the emulation of a given input as it was executed within a fuzzer instance. To help you with the correct invocation and to reduce verbosity when compared to the raw <code>fuzzware emu</code> interface, it translates trace- to corresponding input file paths and resolves numeric input ids.</p>
+<p>To replay an input or an input corresponding to a trace file for the first configuration iteration, use:</p>
+<pre><code># By an input file
+fuzzware replay fuzzware-project/main001/fuzzers/fuzzer1/queue/id:000000*
+# By a trace file
+fuzzware replay fuzzware-project/main001/fuzzers/fuzzer1/traces/bblset_id:000000*
+</code></pre>
+<p>To replay an input based on its id (here, the first input id <code>000000</code> is used) of the latest configuration iteration, run from within the project base directory:</p>
+<pre><code>fuzzware replay 0
+</code></pre>
+<p>You can also replay an input by just giving its name and fuzzware will find the exact path for you, as long as the input file name is unique.</p>
+<p>Finally, to save an extra invocation of <code>fuzzware cov</code> to find a suitable input file, you can also have fuzzware find an input path which covers a specific address or symbol and replay it automatically for you. To replay the first input file reaching the <code>main</code> function, use:</p>
+<pre><code>fuzzware replay --covering main
+</code></pre>
+<p>You can provide the same additional arguments to the <code>replay</code> command as you would to the <code>emu</code> command as shown previously. Note that for projects containing multiple fuzzer instances this may become ambiguous for numeric ids. In that case, fuzzware will complain and you will need to add arguments or navigate to a deeper working directory inside the project.</p>
+<p>For all replay-supported options, use:</p>
+<pre><code>fuzzware replay -h
+</code></pre>
+<h2 id="raw-emulation-runs"><a class="header" href="#raw-emulation-runs">Raw Emulation Runs</a></h2>
+<p>The following code snippets assume that your current working directory is the firmware target directory (for the <code>Getting Started</code> examples, this would be <code>examples/pw-recovery/ARCH_PRO</code>).</p>
+<p>For additional debugging output for the initial input:</p>
+<pre><code>fuzzware emu -c fuzzware-project/main001/config.yml --debug -t -M fuzzware-project/main001/fuzzers/fuzzer1/queue/id:000000,*
+</code></pre>
+<p>Re-run a crashing input to triage the crash:</p>
+<pre><code>fuzzware emu -c fuzzware-project/main001/config.yml fuzzware-project/main001/fuzzers/fuzzer1/crashes/id:000000,sig:11,XXXXX
+</code></pre>
+<p>Setting a breakpoint on a crashing input:</p>
+<pre><code>fuzzware emu -c fuzzware-project/main001/config.yml --debug -t -M --breakpoint 0x12345678 fuzzware-project/main001/fuzzers/fuzzer1/crashes/id:000000,*
+</code></pre>
+<p>To generate trace files for further analysis:</p>
+<pre><code>fuzzware emu -c fuzzware-project/main001/config.yml --bb-trace-out=bb_trace.txt --mmio-trace-out=mmio_trace.txt --ram-trace-out=ram_trace.txt fuzzware-project/main001/fuzzers/fuzzer1/crashes/id:000000,sig:11,XXXXX
+</code></pre>
+<p>For all emulator-supported options, use:</p>
+<pre><code>fuzzware emu -h
+</code></pre>
+<h2 id="raw-fuzzing"><a class="header" href="#raw-fuzzing">Raw Fuzzing</a></h2>
+<p>This is likely not what you want to be doing during regular fuzzing (use <code>fuzzware pipeline</code> instead!), as no MMIO access modeling is performed and you are unable to make use of boot guidance by configuration (which is implemented by the pipeline component by inspecting traces and configuring the fuzzers to start from a valid booted state once one is found according to the configured specification).</p>
+<p>That said, if you are confident in a configuration that you built or the pipeline built for you over time and which you are sure will not be updated anymore, you can also run a standalone fuzzer without modeling or other pipeline features.</p>
+<p>You can run a standalone fuzzer (make sure you are in the correct virtualenv in local setups) in the following way:</p>
+<pre><code># in a local setup: workon fuzzware
+cd examples/pw-recovery/ARCH_PRO
+fuzzware fuzz afl-output-dir
+</code></pre>
+<p>For a full list of options:</p>
+<pre><code>fuzzware fuzz -h
+</code></pre>
+<h2 id="generating-statistics"><a class="header" href="#generating-statistics">Generating Statistics</a></h2>
+<p>To aggregate data on a given <code>fuzzware-project</code> directory, we can use <code>fuzzware genstats</code> to generate matrics about code coverage, how much time was spent on different types of pipeline jobs, the fuzzing input consumption of different MMIO models, and on the contexts in which crashes occured:</p>
+<p>For a full list of options:</p>
+<pre><code>fuzzware genstats -h
+</code></pre>
+<h2 id="generating-traces"><a class="header" href="#generating-traces">Generating Traces</a></h2>
+<p>By default, the pipeline component only generates set-based traces which are quick to compute and storage-light. However, Fuzzware's emulation component is also able to generate full traces. While taking longer to compute and taking up more disk space, these traces contain a full list of sequential trace events and can be parsed automatically. Generating such traces could be interesting for manually looking into firmware behavior or for scripting some trace-based analysis.</p>
+<p>For a full list of options:</p>
+<pre><code>fuzzware gentraces -h
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="manipulating-inputs"><a class="header" href="#manipulating-inputs">Manipulating Inputs</a></h1>
+<p>Quite frankly, manually manipulating inputs is not well supported by Fuzzware tooling at the time of writing, and as a consequence, it is very finicky. With that said, let us know if you would like to tinker in this direction and build proper input patching tooling!</p>
+<p>An input to Fuzzware's emulator is basically a sequence of bytes which get consumed on-demand as firmware is executed. As the emulator behaves the same for a given input on every run, we can replay it to reproduce a given behavior. However, we do not know upfront how the bytes within the input file correspond to MMIO reads during firmware emulation.</p>
+<h2 id="generating-an-mmio-trace"><a class="header" href="#generating-an-mmio-trace">Generating an MMIO Trace</a></h2>
+<p>To figure out the mapping between input byte and MMIO read, we need to first generate an MMIO trace:</p>
+<pre><code>fuzzware emu --mmio-trace-out=mmio_trace.txt &lt;path_to_input&gt;
+</code></pre>
+<h2 id="understanding-the-mmio-trace"><a class="header" href="#understanding-the-mmio-trace">Understanding the MMIO Trace</a></h2>
+<p>The resulting MMIO trace file <code>mmio_trace.txt</code> contains one entry for each MMIO access (read and write) that was performed during the emulation run for the given input file. Each line has the following structure:</p>
+<pre><code># event_id, pc, lr, mode, orig_access_size, access_fuzz_ind, num_consumed_fuzz_bytes, address, val_text
+</code></pre>
+<p>As an example (taken from the <code>ARCH_PRO</code> target):</p>
+<pre><code>009e: e98 641 r 1 118 0 0x4000c014:1
+009f: ea4 641 r 1 118 1 0x4000c000:43
+00a0: e98 641 r 1 119 0 0x4000c014:1
+</code></pre>
+<p>The first line is interpreted in the following way: At <code>pc</code> address <code>0xe98</code> at which point <code>lr</code> had value <code>0x641</code>, a <code>read</code> operation on address <code>0x4000c014</code> was performed. The mmio access had a size of <code>1</code>, and the fuzzing input cursor was at position <code>118</code> (decimal) into the input file. For this MMIO access, no input was consumed (<code>0</code> bytes of fuzzing bytes consumed), and the value <code>1</code> got returned for the read.</p>
+<p>Referring back to the MMIO model for this access, we find:</p>
+<pre><code>mmio_models:
+  constant:
+    pc_00000e98_mmio_4000c014:
+      access_size: 0x1
+      addr: 0x4000c014
+      pc: 0xe98
+      val: 0x1
+</code></pre>
+<p>This corresponds to what we would expect: Accesses from <code>pc=0xe98</code> to MMIO address <code>0x4000c014</code> return a constant value of <code>1</code>.</p>
+<p>Looking at the second MMIO access, we find: At <code>pc</code> address <code>0xea4</code> at which point <code>lr</code> had value <code>0x641</code>, a <code>read</code> operation on address <code>0x4000c000</code> was performed. The mmio access had a size of <code>1</code>, and the fuzzing input cursor was at position <code>118</code> (decimal) into the input file. For this MMIO access, one byte of input was consumed, and the value <code>0x43</code> got returned for the read.</p>
+<p>Once again, referring back to the MMIO model configuration, we find a model which fits the trace entry (<code>unmodeled (&quot;identity model&quot; in paper speech)</code> means consuming as much input as was requested):</p>
+<pre><code>  unmodeled:
+    pc_00000ea4_mmio_4000c000:
+      access_size: 0x1
+      addr: 0x4000c000
+      pc: 0xea4
+</code></pre>
+<p>From this excerpt of the input file, we see that byte <code>118</code> within the input file is returned for an access to address <code>0x4000c000</code> from <code>pc=0xea4</code>. Looking into what this corresponds in firmware code we find that this actually represents a serial input character.</p>
+<h2 id="patching-the-input-file"><a class="header" href="#patching-the-input-file">Patching the Input File</a></h2>
+<p>Based on this knowledge, we can now start patching input bytes at known offsets within the binary input file to change what values are read.</p>
+<p>You can make sure by re-running the input in the emulator that the change you performed actually had the desired effect:</p>
+<pre><code>fuzzware emu --mmio-trace-out=mmio_trace_patched.txt &lt;input_patched&gt;
+</code></pre>
+<p>Diffing the two traces should now show that the given MMIO access changed according to your prediction.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="configuring-a-firmware-sample"><a class="header" href="#configuring-a-firmware-sample">Configuring a Firmware Sample</a></h1>
+<p>After building a firmware sample, we need to set it up for fuzzing initially. After some time fuzzing, analyzing coverage and the target's code itself, we may also revise the configuration and optimize it for optimal fuzzing performance.</p>
+<p>In general, while many of the following configuration options are not strictly required to fuzz test a sample, stacking as many configurations as possible for a given target will improve fuzzing performance significantly. In the end, the more firmware-specific quirks and overhead we can get rid of, the more we can focus the fuzzer on the functionality we are interested in. This will translate into the firmware behaving more and more like an ordinary command-line tool under test, making the fuzzer all the more effective in a practical setting.</p>
+<p>There are some configuration options which are not discussed here. Also refer to <a href="../emulator/README_config.yml">/emulator/README_config.yml</a> for additional options (and if you are really interested, the <a href="../emulator/harness/fuzzware_harness/harness.py">code implementing the configuration parsing</a> in the emulator to make sure we did not miss anything important).</p>
+<h1 id="automated-configuration-fuzzware-genconfig"><a class="header" href="#automated-configuration-fuzzware-genconfig">Automated Configuration: fuzzware genconfig</a></h1>
+<p>To configure a firmware image, the <code>fuzzware genconfig</code> utility might be a good starting point. This will generate a configuration file with a best-effort memory map (for ELF files this will be derived from ELF sections and Cortex-M standard memory ranges) and run sample inputs to detect very early crashes in an effort to identify and configure custom MMIO ranges. <strong>CAUTION: Do NOT use this generated configuration without manually verifying it. While the utility may work well for some cases, it will fail in others.</strong></p>
+<p>One specific thing to watch out for here is memory ranges named in the following pattern: <code>dynamically_added_crash_region_*</code>. This shows that Fuzzware encountered very early crashes of the firmware images which it expected to contain custom MMIO ranges. While this may be the correct behavior, this region is not marked as an MMIO region (its name does not start with <code>mmio</code>) and accesses to it will not be fed fuzzing input, making it a RAM-like region. Verify such regions and see whether the assigned region signifies any errors in the configuration, and if the region is legitimate, decide whether this region should be an MMIO region. If it should be an MMIO region, rename it to be prefixed by <code>mmio</code>. Encountering such a region may also indicate a variety of different issues, such as that you are missing some ROM contents (like ROM code or factory-preset identification/hardware revision values), or that you are facing an aliased region of the main code flash.</p>
+<h1 id="manual-base-config"><a class="header" href="#manual-base-config">Manual Base Config</a></h1>
+<p>As also indicated in the <a href="../README.html">top-level README</a>, we can also create a configuration manually:</p>
+<p>Find a detailed overview of configuration options in <a href="../emulator/README_config.yml">emulator/README_config.yml</a>.</p>
+<p>At minimum, you will need a bare-metal firmware blob and know where it is located in memory. With this, you can setup a memory map. For a firmware blob <code>fw.bin</code> located at address <code>0x08000000</code> in ROM, a config located in a newly created <code>examples/my-fw</code> directory would look like this:</p>
+<pre><code>include:
+    - ../configs/hw/cortexm_memory.yml
+    # For optional interrupts
+    - ./../configs/fuzzing/round_robin_interrupts.yml
+
+memory_map:
+    rom: 
+        base_addr: 0x08000000
+        size: 0x800000
+        permissions: r-x
+        file: ./fw.bin
+</code></pre>
+<h1 id="optimizing-interrupt-behavior"><a class="header" href="#optimizing-interrupt-behavior">Optimizing Interrupt Behavior</a></h1>
+<p>A default, catch-all interrupt behavior is just raising one interrupt every 1000 basic blocks in a round-robin fashion. Refer to <a href="../emulator/README_config.yml">emulator/README_config.yml</a> on the exact ways of how interrupts can be configured.</p>
+<p>Depending on the architecture of your target code and the amount of knowledge you possess on it, you may apply more specific interrupt configurations, such as raising a specific interrupt when visiting a specific basic block, or letting the fuzzer decide based on fuzzing input which interrupt to trigger, instead of triggering all interrupt in a round-robin manner. Using fuzzing input to let the fuzzer decide about which interrupt to trigger leads to a tradeoff: On the one hand, it provides the fuzzer with more flexibility, but on the other hand it also forces more fuzzing input to be consumed.</p>
+<p>You can also disable a given interrupt in case you know it is either irrelevant to what you want to fuzz, or it is actively harming firmware execution (such as a triggering watchdog timer). You can do this via the <code>disabled_irqs</code> configuration (again, refer to <a href="../emulator/README_config.yml">emulator/README_config.yml</a> for details).</p>
+<p>For an example of how we used triggering interrupts at the target OS'es idle loop, refer to the <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/03-fuzzing-new-targets/zephyr-os/building/base_configs/zephyr_default.yml">fuzzware-experiment repo's CVE firmware setup</a>.</p>
+<h1 id="optimizing-fuzzer-performance"><a class="header" href="#optimizing-fuzzer-performance">Optimizing Fuzzer Performance</a></h1>
+<h2 id="shortcutting-function-execution"><a class="header" href="#shortcutting-function-execution">Shortcutting Function Execution</a></h2>
+<p>To optimize the fuzzer's performance, we want to maximize the time in which the fuzzer does meaningful things. This includes removing typical cycle-consuming fuzzing roadblocks (such as busy <code>delay</code> loops) and maybe avoiding the execution of output functions. We can do this via empty function hooks in the <code>handlers</code> config of <code>config.yml</code>:</p>
+<pre><code>handlers:
+    # full config without implicit values
+    delay:
+        # address or symbol of the delay function
+        addr: 0x123
+        # this is the default value, but set in here for reference
+        do_return: true
+        # this is the default value, but set in here for reference
+        handler: null
+</code></pre>
+<p>This will make Fuzzware inject a return instruction at the start of the <code>delay</code> function.</p>
+<p>Making use of default assignments, this configuration can be shortened to the following:</p>
+<pre><code>handlers:
+    # if no `addr` field is given, the name is used as a symbol
+    delay:
+</code></pre>
+<p>Similar functions which you might want to cut short are things like sleeping, logging, unrelated initialization functionality, and the like.</p>
+<p>The emulator also has limited support for built-in binary patching ways of assigning a return value while shortcutting function execution:</p>
+<pre><code>handlers:
+    # Return 0
+    my_useless_initialization_function_requiring_zero:
+        handler: native.return_0x0
+    # Return 1
+    my_useless_initialization_function_requiring_nonzero:
+        handler: native.return_0x1
+    # And welcome to the dark side...
+    my_useless_initialization_function_requiring_binary_patch:
+        # manually patching &quot;bx lr&quot; as byte patch
+        handler: native.inline_asm_7047
+</code></pre>
+<p>For examples of how we used this type of configuration to save CPU cycles while discovering the CVE's of the paper, refer to the <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/03-fuzzing-new-targets/zephyr-os/building/base_configs/zephyr_skips.yml">fuzzware-experiment repo's CVE firmware setup</a> and its <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/03-fuzzing-new-targets/zephyr-os/prebuilt_samples/CVE-2021-3329/POC">crashing POC inputs</a></p>
+<h2 id="early-emulation-run-exits"><a class="header" href="#early-emulation-run-exits">Early Emulation Run Exits</a></h2>
+<p>In case we are (no longer) interested in executing things like error functions, we can manually configure the emulator to exit once specific basic blocks are visited. This is interesting for functions which catch errors, signify assertions, or attempt to reset the system:</p>
+<pre><code>exit_at:
+    assert:
+    my_non_existant_symbol: 0x12345
+</code></pre>
+<p>Again the philosophy here is that if we can avoid exiting specific functionality which we know not to be interested in, we can save precious CPU cycles, keep the fuzzer's attention away from useless code and keep it focussed on other functionality.</p>
+<p>For examples of how we used this type of configuration to save CPU cycles while discovering the CVE's of the paper, refer to the <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/03-fuzzing-new-targets/zephyr-os/building/base_configs/zephyr_exits.yml">fuzzware-experiment repo's CVE firmware setup</a> and its <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/03-fuzzing-new-targets/zephyr-os/prebuilt_samples/CVE-2021-3329/POC">crashing POC inputs</a></p>
+<h2 id="configuring-the-boot-process"><a class="header" href="#configuring-the-boot-process">Configuring the Boot Process</a></h2>
+<p>For some firmware samples, booting the firmware itself may be a complex process. In this case, we may want the fuzzer to find a valid booted state and afterwards just continue fuzzing from there. While entirely optional, supplying a valid boot configuration has two advantages:</p>
+<ol>
+<li>Focus the fuzzer on actual input processing instead of finding different invalid boot sequences after a valid boot sequence has been found, which increases meaningful mutations.</li>
+<li>Avoid re-running the boot process on every emulation run, which increases test case throughput / emulator performance.</li>
+</ol>
+<p>Specifying a successful boot process can be achieved using a <code>boot</code> configuration in <code>config.yml</code>. We can define a valid boot state by specifying a set of basic blocks that need to be visited (basic block addresses which signal the success case of a given initialization function), as well as a set of basic blocks to avoid (code locations which indicate an initialization failure):</p>
+<pre><code># Description of a successful boot process of the firmware image
+boot:
+  # A list of addresses required for a successful boot
+  required:
+    # An address (or symbol) in this list may indicate the if/else branch of a positive check
+    - 0x0800052A
+    # Or a function which activates a peripheral which is only called in case all checks were successful
+    - activate_uart_peripheral
+  # A list of addresses which indicate a failed boot
+  avoid:
+    # if/else branch of a failed check
+    - 0x08000518
+    # an error output function logging an error condition
+    - log_error
+  # Address at which the firmware is considered booted (successfully or unsuccessfully based on the previous config attributes)
+  target: idle
+</code></pre>
+<p>The above is an extract from the configuration README in <a href="../emulator/README_config.yml">emulator/README_config.yml</a>.</p>
+<p>This configuration is picked up by <code>fuzzware pipeline</code> which checks each new basic block coverage trace to identify a successfully booting input. After identifying such an input, it will then configure it as a prefix input with the emulator for all coming configuration iterations. This essentially sets a snapshot to start at with the emulator, such that emulation in the fuzzer will always start at the configured <code>target</code> location automatically.</p>
+<h1 id="manually-adjusting-mmio-models"><a class="header" href="#manually-adjusting-mmio-models">Manually Adjusting MMIO Models</a></h1>
+<p>This is a rather finicky option, but there may be situations where we find &quot;useless&quot; MMIO accesses to consume a lot of fuzzing input. In these situations we may want to get rid of the accesses by forcing an MMIO register to behave in a specific way that does not involve fuzzing input. The reason for MMIO modeling to assign a non-restrictive model may be manifold: The code may - in theory - differentiate between a whole range of options or the MMIO value is assigned to a global variable which might - in theory - be accessed later in firmware code. These reasons add uncertainty to the modeling mechanism, which makes it conservatively assign a non-restrictive model in some cases.</p>
+<p>Assigning a fixed value to an MMIO read may restrict the firmware state space, which is bad in many cases (which is why MMIO modeling will not assign an overly restrictive model). However, being overly restrictive may be exactly what we want in specific situations. For example, this is true in case we know that always making firmware take a specific path helps the fuzzer achieve better coverage in a part of firmware code we care about. So we may as well assign a fixed value that makes firmware always take the code path we care about.</p>
+<p>While this a bit of an expensive operation upfront (as a lot of full, non-native traces need to be generated), the <code>fuzzware genstats mmio-overhead-elim</code> utility can help you figure out which MMIO accesses consume most of the fuzzing input:</p>
+<pre><code>fuzzware genstats mmio-overhead-elim
+</code></pre>
+<p>This produces a yaml file <code>fuzzware-project/stats/mmio_overhead_elimination.yml</code> which contains data about fuzzing input consumption per MMIO model. Most importantly (in this use case), it also shows which models consume the largest amounts of data. These models may be worth checking out manually to make sure that they are actually meaningful to fuzzing progress. Having the fuzzer mutate meaningless inputs most of the time will not help it discover meaningful firmware behavior. In case a highly-used MMIO model is not actually contributing to code coverage, we may want to manually configure this MMIO access to be modeled in a restrictive way (for example, by assigning a <code>constant</code> model to the respective pc/mmio_addr access context).</p>
+<p>The entry to search for within <code>fuzzware-project/stats/mmio_overhead_elimination.yml</code> is the <code>per_access_context</code> member with context entries that have a large <code>bytes_fuzzing_input</code> value assigned. After figuring out a fitting model type, you may manually assign an MMIO model according to <a href="../emulator/README_config.yml">emulator/README_config.yml</a>. Upon start, the pipeline will take these custom MMIO model configs into account and regard them as definitive, meaning that it will not compute its own model for it.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                        
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                            </nav>
+
+        </div>
+
+        
+        
+        
+                <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+        
+                <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+                        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+                
+    </body>
+</html>
