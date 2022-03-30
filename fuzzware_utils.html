@@ -117,10 +117,7 @@
                                                 <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                                                                        <a href="https://github.com/fuzzware-fuzzer/fuzzware" title="Git repository" aria-label="Git repository">
-                            <i id="git-repository-button" class="fa fa-github"></i>
-                        </a>
-                                                
+                                                                        
                     </div>
                 </div>
 
@@ -160,7 +157,7 @@ echo performance | tee cpu*/cpufreq/scaling_governor
 </code></pre>
 <h2 id="starting-the-pipeline"><a class="header" href="#starting-the-pipeline">Starting the Pipeline</a></h2>
 <p>The pipeline is what you want to be using whenever you start fuzzing a firmware image as it automatically manages fuzzing and model generation for you. It will generate the configurations and inputs that you can use to perform manual triaging and troubleshooting.</p>
-<p>For a properly configured firmware image and when within the installed <code>fuzzware</code> docker container or the <code>fuzzware</code> virtualenv on your locally installed system, you can get started by simply navigating to a correctly configured target directory in <a href="examples">the examples subdirectory</a> and starting the pipeline with default arguments:</p>
+<p>For a properly configured firmware image and when within the installed <code>fuzzware</code> docker container or the <code>fuzzware</code> virtualenv on your locally installed system, you can get started by simply navigating to a correctly configured target directory in <a href="../examples">the examples subdirectory</a> and starting the pipeline with default arguments:</p>
 <p>Using Docker:</p>
 <pre><code>./run_docker.sh ./examples fuzzware pipeline ./pw-recovery/ARCH_PRO
 </code></pre>
@@ -174,7 +171,7 @@ echo performance | tee cpu*/cpufreq/scaling_governor
 <li><code>fuzzware-project/mainXXX/fuzzers/fuzzerY/queue</code>: Fuzzer inputs</li>
 <li><code>fuzzware-project/mainXXX/fuzzers/fuzzerY/traces</code>: Pipeline-generated compact traces (detailed traces can be generated manually using <code>fuzzware replay</code> or <code>fuzzware emu</code>)</li>
 </ul>
-<p>For more information on the results stored in the <code>fuzzware-project</code> directory, refer to the pipeline's README <a href="pipeline/README.html">pipeline/README.md</a>.</p>
+<p>For more information on the results stored in the <code>fuzzware-project</code> directory, refer to the pipeline's README <a href="https://github.com/fuzzware-fuzzer/fuzzware-pipeline/blob/main/README.md">fuzzware-pipeline/README.md</a>.</p>
 <p>There are situations where you might want to use a sub-component in isolation. This may be the case for troubleshooting, debugging, crash triaging and during fuzzware development. For a full list of supported commands, use:</p>
 <pre><code>fuzzware -h
 </code></pre>

@@ -118,10 +118,7 @@
                                                 <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                                                                        <a href="https://github.com/fuzzware-fuzzer/fuzzware" title="Git repository" aria-label="Git repository">
-                            <i id="git-repository-button" class="fa fa-github"></i>
-                        </a>
-                                                
+                                                                        
                     </div>
                 </div>
 
@@ -155,8 +152,8 @@
 <tr><td><a href="crash_analysis.html">crash_analysis.md</a></td><td>Checking for crashes, bucketing them, and analyzing their root cause.</td></tr>
 <tr><td><a href="fuzzware_utils.html">fuzzware_utils.md</a></td><td>An overview of some of the (other) Fuzzware tools and when they could be useful</td></tr>
 <tr><td><a href="manipulating_inputs.html">manipulating_inputs.md</a></td><td>How to understand and manipulate inputs on your own, if you really need to</td></tr>
-<tr><td><a href="../emulator/README_config.yml">/emulator/README_config.yml</a></td><td>A pretty detailed (even if maybe not quite definitive) description of the config.yml syntax and supported options.</td></tr>
-<tr><td><a href="../pipeline/README_pipeline_architecture.html">/pipeline/README.md</a></td><td>An overview of the how the pipeline component is implented.</td></tr>
+<tr><td><a href="https://github.com/fuzzware-fuzzer/fuzzware-emulator/blob/main/README_config.yml">fuzzware-emulator/README_config.yml</a></td><td>A pretty detailed (even if maybe not quite definitive) description of the config.yml syntax and supported options.</td></tr>
+<tr><td><a href="https://github.com/fuzzware-fuzzer/fuzzware-pipeline/blob/main/README_pipeline_architecture.md">fuzzware-pipeline/README.md</a></td><td>An overview of the how the pipeline component is implented.</td></tr>
 </tbody></table>
 <p>As always, you don't necessarily need to treat the code itself as a black box. Feel free to also check out the emulator- as well as the pipeline source code itself.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="analyzing-code-coverage"><a class="header" href="#analyzing-code-coverage">Analyzing Code Coverage</a></h1>
@@ -271,8 +268,8 @@ uc.mem.u8(uc.mem.r1, uc.mem.r2)
     handler: fuzzware_harness.user_hooks.debug.print_args_1
 </code></pre>
 <p><strong>NOTE: Make sure to copy and modify the config.yml from the mainXXX directory that the given inputs belongs to. Otherwise, MMIO models will be missing/mismatching and the run will not replay as expected. For example, for the third main directory, create a backup and modify fuzzware-project/main003/config.yml. Once outside the fuzzware-project directory, you will also need to use the plain &quot;fuzzware emu&quot; utility instead of the &quot;fuzzware replay&quot; utility to run inputs for the given configuration.</strong></p>
-<p>As an example, please refer to the <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/03-fuzzing-new-targets/zephyr-os/prebuilt_samples/CVE-2021-3329/POC/config.yml">crashing POC of CVE-2021-3329</a> to see how these hooks can make understanding a given crash significantly simpler.</p>
-<p>Also, for an example of a set of generic debug print hooks (do not use in the fuzzing configuration itself!), refer to <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/03-fuzzing-new-targets/zephyr-os/building/base_configs/zephyr_debug_snippets.yml">zephyr_debug_snippets.yml</a> within the fuzzware-experiments repo.</p>
+<p>As an example, please refer to the <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/blob/main/03-fuzzing-new-targets/zephyr-os/prebuilt_samples/CVE-2021-3329/POC/config.yml">crashing POC of CVE-2021-3329</a> to see how these hooks can make understanding a given crash significantly simpler.</p>
+<p>Also, for an example of a set of generic debug print hooks (do not use in the fuzzing configuration itself!), refer to <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/blob/main/03-fuzzing-new-targets/zephyr-os/building/base_configs/zephyr_debug_snippets.yml">zephyr_debug_snippets.yml</a> within the fuzzware-experiments repo.</p>
 <h2 id="scripting-a-trace-analysis"><a class="header" href="#scripting-a-trace-analysis">Scripting A Trace Analysis</a></h2>
 <p>Caution: This is not much of an actively used way for analyzing crashes, but making you aware of the possibility may be worth mentioning to the interested reader. It may also allow you get started on building some crash analysis tooling. In case you do build such tooling, make sure to let us know about it!</p>
 <p>In case you prefer to write scripts to analyze traces, fuzzware provides some trace dumping and parsing utilities. For example, in case you would like to analyze a memory read/write trace, you could use:</p>
@@ -299,7 +296,7 @@ echo performance | tee cpu*/cpufreq/scaling_governor
 </code></pre>
 <h2 id="starting-the-pipeline"><a class="header" href="#starting-the-pipeline">Starting the Pipeline</a></h2>
 <p>The pipeline is what you want to be using whenever you start fuzzing a firmware image as it automatically manages fuzzing and model generation for you. It will generate the configurations and inputs that you can use to perform manual triaging and troubleshooting.</p>
-<p>For a properly configured firmware image and when within the installed <code>fuzzware</code> docker container or the <code>fuzzware</code> virtualenv on your locally installed system, you can get started by simply navigating to a correctly configured target directory in <a href="examples">the examples subdirectory</a> and starting the pipeline with default arguments:</p>
+<p>For a properly configured firmware image and when within the installed <code>fuzzware</code> docker container or the <code>fuzzware</code> virtualenv on your locally installed system, you can get started by simply navigating to a correctly configured target directory in <a href="../examples">the examples subdirectory</a> and starting the pipeline with default arguments:</p>
 <p>Using Docker:</p>
 <pre><code>./run_docker.sh ./examples fuzzware pipeline ./pw-recovery/ARCH_PRO
 </code></pre>
@@ -313,7 +310,7 @@ echo performance | tee cpu*/cpufreq/scaling_governor
 <li><code>fuzzware-project/mainXXX/fuzzers/fuzzerY/queue</code>: Fuzzer inputs</li>
 <li><code>fuzzware-project/mainXXX/fuzzers/fuzzerY/traces</code>: Pipeline-generated compact traces (detailed traces can be generated manually using <code>fuzzware replay</code> or <code>fuzzware emu</code>)</li>
 </ul>
-<p>For more information on the results stored in the <code>fuzzware-project</code> directory, refer to the pipeline's README <a href="pipeline/README.html">pipeline/README.md</a>.</p>
+<p>For more information on the results stored in the <code>fuzzware-project</code> directory, refer to the pipeline's README <a href="https://github.com/fuzzware-fuzzer/fuzzware-pipeline/blob/main/README.md">fuzzware-pipeline/README.md</a>.</p>
 <p>There are situations where you might want to use a sub-component in isolation. This may be the case for troubleshooting, debugging, crash triaging and during fuzzware development. For a full list of supported commands, use:</p>
 <pre><code>fuzzware -h
 </code></pre>
@@ -428,13 +425,13 @@ fuzzware fuzz afl-output-dir
 <div style="break-before: page; page-break-before: always;"></div><h1 id="configuring-a-firmware-sample"><a class="header" href="#configuring-a-firmware-sample">Configuring a Firmware Sample</a></h1>
 <p>After building a firmware sample, we need to set it up for fuzzing initially. After some time fuzzing, analyzing coverage and the target's code itself, we may also revise the configuration and optimize it for optimal fuzzing performance.</p>
 <p>In general, while many of the following configuration options are not strictly required to fuzz test a sample, stacking as many configurations as possible for a given target will improve fuzzing performance significantly. In the end, the more firmware-specific quirks and overhead we can get rid of, the more we can focus the fuzzer on the functionality we are interested in. This will translate into the firmware behaving more and more like an ordinary command-line tool under test, making the fuzzer all the more effective in a practical setting.</p>
-<p>There are some configuration options which are not discussed here. Also refer to <a href="../emulator/README_config.yml">/emulator/README_config.yml</a> for additional options (and if you are really interested, the <a href="../emulator/harness/fuzzware_harness/harness.py">code implementing the configuration parsing</a> in the emulator to make sure we did not miss anything important).</p>
+<p>There are some configuration options which are not discussed here. Also refer to <a href="https://github.com/fuzzware-fuzzer/fuzzware-emulator/blob/main/README_config.yml">fuzzware-emulator/README_config.yml</a> for additional options (and if you are really interested, the <a href="https://github.com/fuzzware-fuzzer/fuzzware-emulator/blob/main/harness/fuzzware_harness/harness.py">code implementing the configuration parsing</a> in the emulator to make sure we did not miss anything important).</p>
 <h1 id="automated-configuration-fuzzware-genconfig"><a class="header" href="#automated-configuration-fuzzware-genconfig">Automated Configuration: fuzzware genconfig</a></h1>
 <p>To configure a firmware image, the <code>fuzzware genconfig</code> utility might be a good starting point. This will generate a configuration file with a best-effort memory map (for ELF files this will be derived from ELF sections and Cortex-M standard memory ranges) and run sample inputs to detect very early crashes in an effort to identify and configure custom MMIO ranges. <strong>CAUTION: Do NOT use this generated configuration without manually verifying it. While the utility may work well for some cases, it will fail in others.</strong></p>
 <p>One specific thing to watch out for here is memory ranges named in the following pattern: <code>dynamically_added_crash_region_*</code>. This shows that Fuzzware encountered very early crashes of the firmware images which it expected to contain custom MMIO ranges. While this may be the correct behavior, this region is not marked as an MMIO region (its name does not start with <code>mmio</code>) and accesses to it will not be fed fuzzing input, making it a RAM-like region. Verify such regions and see whether the assigned region signifies any errors in the configuration, and if the region is legitimate, decide whether this region should be an MMIO region. If it should be an MMIO region, rename it to be prefixed by <code>mmio</code>. Encountering such a region may also indicate a variety of different issues, such as that you are missing some ROM contents (like ROM code or factory-preset identification/hardware revision values), or that you are facing an aliased region of the main code flash.</p>
 <h1 id="manual-base-config"><a class="header" href="#manual-base-config">Manual Base Config</a></h1>
 <p>As also indicated in the <a href="../README.html">top-level README</a>, we can also create a configuration manually:</p>
-<p>Find a detailed overview of configuration options in <a href="../emulator/README_config.yml">emulator/README_config.yml</a>.</p>
+<p>Find a detailed overview of configuration options in <a href="https://github.com/fuzzware-fuzzer/fuzzware-emulator/blob/main/README_config.yml">fuzzware-emulator/README_config.yml</a>.</p>
 <p>At minimum, you will need a bare-metal firmware blob and know where it is located in memory. With this, you can setup a memory map. For a firmware blob <code>fw.bin</code> located at address <code>0x08000000</code> in ROM, a config located in a newly created <code>examples/my-fw</code> directory would look like this:</p>
 <pre><code>include:
     - ../configs/hw/cortexm_memory.yml
@@ -449,10 +446,10 @@ memory_map:
         file: ./fw.bin
 </code></pre>
 <h1 id="optimizing-interrupt-behavior"><a class="header" href="#optimizing-interrupt-behavior">Optimizing Interrupt Behavior</a></h1>
-<p>A default, catch-all interrupt behavior is just raising one interrupt every 1000 basic blocks in a round-robin fashion. Refer to <a href="../emulator/README_config.yml">emulator/README_config.yml</a> on the exact ways of how interrupts can be configured.</p>
+<p>A default, catch-all interrupt behavior is just raising one interrupt every 1000 basic blocks in a round-robin fashion. Refer to <a href="https://github.com/fuzzware-fuzzer/fuzzware-emulator/blob/main/README_config.yml">fuzzware-emulator/README_config.yml</a> on the exact ways of how interrupts can be configured.</p>
 <p>Depending on the architecture of your target code and the amount of knowledge you possess on it, you may apply more specific interrupt configurations, such as raising a specific interrupt when visiting a specific basic block, or letting the fuzzer decide based on fuzzing input which interrupt to trigger, instead of triggering all interrupt in a round-robin manner. Using fuzzing input to let the fuzzer decide about which interrupt to trigger leads to a tradeoff: On the one hand, it provides the fuzzer with more flexibility, but on the other hand it also forces more fuzzing input to be consumed.</p>
-<p>You can also disable a given interrupt in case you know it is either irrelevant to what you want to fuzz, or it is actively harming firmware execution (such as a triggering watchdog timer). You can do this via the <code>disabled_irqs</code> configuration (again, refer to <a href="../emulator/README_config.yml">emulator/README_config.yml</a> for details).</p>
-<p>For an example of how we used triggering interrupts at the target OS'es idle loop, refer to the <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/03-fuzzing-new-targets/zephyr-os/building/base_configs/zephyr_default.yml">fuzzware-experiment repo's CVE firmware setup</a>.</p>
+<p>You can also disable a given interrupt in case you know it is either irrelevant to what you want to fuzz, or it is actively harming firmware execution (such as a triggering watchdog timer). You can do this via the <code>disabled_irqs</code> configuration (again, refer to <a href="https://github.com/fuzzware-fuzzer/fuzzware-emulator/blob/main/README_config.yml">fuzzware-emulator/README_config.yml</a> for details).</p>
+<p>For an example of how we used triggering interrupts at the target OS'es idle loop, refer to the <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/blob/main/03-fuzzing-new-targets/zephyr-os/building/base_configs/zephyr_default.yml">fuzzware-experiment repo's CVE firmware setup</a>.</p>
 <h1 id="optimizing-fuzzer-performance"><a class="header" href="#optimizing-fuzzer-performance">Optimizing Fuzzer Performance</a></h1>
 <h2 id="shortcutting-function-execution"><a class="header" href="#shortcutting-function-execution">Shortcutting Function Execution</a></h2>
 <p>To optimize the fuzzer's performance, we want to maximize the time in which the fuzzer does meaningful things. This includes removing typical cycle-consuming fuzzing roadblocks (such as busy <code>delay</code> loops) and maybe avoiding the execution of output functions. We can do this via empty function hooks in the <code>handlers</code> config of <code>config.yml</code>:</p>
@@ -486,7 +483,7 @@ memory_map:
         # manually patching &quot;bx lr&quot; as byte patch
         handler: native.inline_asm_7047
 </code></pre>
-<p>For examples of how we used this type of configuration to save CPU cycles while discovering the CVE's of the paper, refer to the <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/03-fuzzing-new-targets/zephyr-os/building/base_configs/zephyr_skips.yml">fuzzware-experiment repo's CVE firmware setup</a> and its <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/03-fuzzing-new-targets/zephyr-os/prebuilt_samples/CVE-2021-3329/POC">crashing POC inputs</a></p>
+<p>For examples of how we used this type of configuration to save CPU cycles while discovering the CVE's of the paper, refer to the <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/blob/main/03-fuzzing-new-targets/zephyr-os/building/base_configs/zephyr_skips.yml">fuzzware-experiment repo's CVE firmware setup</a> and its <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/blob/main/03-fuzzing-new-targets/zephyr-os/prebuilt_samples/CVE-2021-3329/POC">crashing POC inputs</a></p>
 <h2 id="early-emulation-run-exits"><a class="header" href="#early-emulation-run-exits">Early Emulation Run Exits</a></h2>
 <p>In case we are (no longer) interested in executing things like error functions, we can manually configure the emulator to exit once specific basic blocks are visited. This is interesting for functions which catch errors, signify assertions, or attempt to reset the system:</p>
 <pre><code>exit_at:
@@ -494,7 +491,7 @@ memory_map:
     my_non_existant_symbol: 0x12345
 </code></pre>
 <p>Again the philosophy here is that if we can avoid exiting specific functionality which we know not to be interested in, we can save precious CPU cycles, keep the fuzzer's attention away from useless code and keep it focussed on other functionality.</p>
-<p>For examples of how we used this type of configuration to save CPU cycles while discovering the CVE's of the paper, refer to the <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/03-fuzzing-new-targets/zephyr-os/building/base_configs/zephyr_exits.yml">fuzzware-experiment repo's CVE firmware setup</a> and its <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/03-fuzzing-new-targets/zephyr-os/prebuilt_samples/CVE-2021-3329/POC">crashing POC inputs</a></p>
+<p>For examples of how we used this type of configuration to save CPU cycles while discovering the CVE's of the paper, refer to the <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/blob/main/03-fuzzing-new-targets/zephyr-os/building/base_configs/zephyr_exits.yml">fuzzware-experiment repo's CVE firmware setup</a> and its <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/blob/main/03-fuzzing-new-targets/zephyr-os/prebuilt_samples/CVE-2021-3329/POC">crashing POC inputs</a></p>
 <h2 id="configuring-the-boot-process"><a class="header" href="#configuring-the-boot-process">Configuring the Boot Process</a></h2>
 <p>For some firmware samples, booting the firmware itself may be a complex process. In this case, we may want the fuzzer to find a valid booted state and afterwards just continue fuzzing from there. While entirely optional, supplying a valid boot configuration has two advantages:</p>
 <ol>
@@ -519,7 +516,7 @@ boot:
   # Address at which the firmware is considered booted (successfully or unsuccessfully based on the previous config attributes)
   target: idle
 </code></pre>
-<p>The above is an extract from the configuration README in <a href="../emulator/README_config.yml">emulator/README_config.yml</a>.</p>
+<p>The above is an extract from the configuration README in <a href="https://github.com/fuzzware-fuzzer/fuzzware-emulator/blob/main/README_config.yml">fuzzware-emulator/README_config.yml</a>.</p>
 <p>This configuration is picked up by <code>fuzzware pipeline</code> which checks each new basic block coverage trace to identify a successfully booting input. After identifying such an input, it will then configure it as a prefix input with the emulator for all coming configuration iterations. This essentially sets a snapshot to start at with the emulator, such that emulation in the fuzzer will always start at the configured <code>target</code> location automatically.</p>
 <h1 id="manually-adjusting-mmio-models"><a class="header" href="#manually-adjusting-mmio-models">Manually Adjusting MMIO Models</a></h1>
 <p>This is a rather finicky option, but there may be situations where we find &quot;useless&quot; MMIO accesses to consume a lot of fuzzing input. In these situations we may want to get rid of the accesses by forcing an MMIO register to behave in a specific way that does not involve fuzzing input. The reason for MMIO modeling to assign a non-restrictive model may be manifold: The code may - in theory - differentiate between a whole range of options or the MMIO value is assigned to a global variable which might - in theory - be accessed later in firmware code. These reasons add uncertainty to the modeling mechanism, which makes it conservatively assign a non-restrictive model in some cases.</p>
@@ -528,7 +525,7 @@ boot:
 <pre><code>fuzzware genstats mmio-overhead-elim
 </code></pre>
 <p>This produces a yaml file <code>fuzzware-project/stats/mmio_overhead_elimination.yml</code> which contains data about fuzzing input consumption per MMIO model. Most importantly (in this use case), it also shows which models consume the largest amounts of data. These models may be worth checking out manually to make sure that they are actually meaningful to fuzzing progress. Having the fuzzer mutate meaningless inputs most of the time will not help it discover meaningful firmware behavior. In case a highly-used MMIO model is not actually contributing to code coverage, we may want to manually configure this MMIO access to be modeled in a restrictive way (for example, by assigning a <code>constant</code> model to the respective pc/mmio_addr access context).</p>
-<p>The entry to search for within <code>fuzzware-project/stats/mmio_overhead_elimination.yml</code> is the <code>per_access_context</code> member with context entries that have a large <code>bytes_fuzzing_input</code> value assigned. After figuring out a fitting model type, you may manually assign an MMIO model according to <a href="../emulator/README_config.yml">emulator/README_config.yml</a>. Upon start, the pipeline will take these custom MMIO model configs into account and regard them as definitive, meaning that it will not compute its own model for it.</p>
+<p>The entry to search for within <code>fuzzware-project/stats/mmio_overhead_elimination.yml</code> is the <code>per_access_context</code> member with context entries that have a large <code>bytes_fuzzing_input</code> value assigned. After figuring out a fitting model type, you may manually assign an MMIO model according to <a href="https://github.com/fuzzware-fuzzer/fuzzware-emulator/blob/main/README_config.yml">fuzzware-emulator/README_config.yml</a>. Upon start, the pipeline will take these custom MMIO model configs into account and regard them as definitive, meaning that it will not compute its own model for it.</p>
 
                     </main>
 

@@ -117,10 +117,7 @@
                                                 <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                                                                        <a href="https://github.com/fuzzware-fuzzer/fuzzware" title="Git repository" aria-label="Git repository">
-                            <i id="git-repository-button" class="fa fa-github"></i>
-                        </a>
-                                                
+                                                                        
                     </div>
                 </div>
 
@@ -227,8 +224,8 @@ uc.mem.u8(uc.mem.r1, uc.mem.r2)
     handler: fuzzware_harness.user_hooks.debug.print_args_1
 </code></pre>
 <p><strong>NOTE: Make sure to copy and modify the config.yml from the mainXXX directory that the given inputs belongs to. Otherwise, MMIO models will be missing/mismatching and the run will not replay as expected. For example, for the third main directory, create a backup and modify fuzzware-project/main003/config.yml. Once outside the fuzzware-project directory, you will also need to use the plain &quot;fuzzware emu&quot; utility instead of the &quot;fuzzware replay&quot; utility to run inputs for the given configuration.</strong></p>
-<p>As an example, please refer to the <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/03-fuzzing-new-targets/zephyr-os/prebuilt_samples/CVE-2021-3329/POC/config.yml">crashing POC of CVE-2021-3329</a> to see how these hooks can make understanding a given crash significantly simpler.</p>
-<p>Also, for an example of a set of generic debug print hooks (do not use in the fuzzing configuration itself!), refer to <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/03-fuzzing-new-targets/zephyr-os/building/base_configs/zephyr_debug_snippets.yml">zephyr_debug_snippets.yml</a> within the fuzzware-experiments repo.</p>
+<p>As an example, please refer to the <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/blob/main/03-fuzzing-new-targets/zephyr-os/prebuilt_samples/CVE-2021-3329/POC/config.yml">crashing POC of CVE-2021-3329</a> to see how these hooks can make understanding a given crash significantly simpler.</p>
+<p>Also, for an example of a set of generic debug print hooks (do not use in the fuzzing configuration itself!), refer to <a href="https://github.com/fuzzware-fuzzer/fuzzware-experiments/blob/main/03-fuzzing-new-targets/zephyr-os/building/base_configs/zephyr_debug_snippets.yml">zephyr_debug_snippets.yml</a> within the fuzzware-experiments repo.</p>
 <h2 id="scripting-a-trace-analysis"><a class="header" href="#scripting-a-trace-analysis">Scripting A Trace Analysis</a></h2>
 <p>Caution: This is not much of an actively used way for analyzing crashes, but making you aware of the possibility may be worth mentioning to the interested reader. It may also allow you get started on building some crash analysis tooling. In case you do build such tooling, make sure to let us know about it!</p>
 <p>In case you prefer to write scripts to analyze traces, fuzzware provides some trace dumping and parsing utilities. For example, in case you would like to analyze a memory read/write trace, you could use:</p>
